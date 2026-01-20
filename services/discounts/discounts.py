@@ -161,4 +161,5 @@ def getDiscount():
     else:
         err = jsonify({"error": "Invalid request method"})
         err.status_code = 405
+        logger.debug(f"Status code: {err.status_code}")
         return err
