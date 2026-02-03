@@ -4,9 +4,7 @@ permissions: {}
 
 on:
   push:
-    branches: [main]
-    paths:
-      - services/discounts/**
+  pull_request:
   workflow_dispatch:
 
 defaults:
