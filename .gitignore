@@ -8,6 +8,7 @@
 **/**/coverage
 **/**/spec/tmp
 .idea
+.vscode/
 .pt
 .ruby-gemset
 .env
