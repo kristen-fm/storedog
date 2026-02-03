@@ -1,0 +1,79 @@
+name: Discounts
+
+permissions: {}
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - services/discounts/**
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: discounts
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Configure Datadog Test Optimization
+        uses: datadog/test-visibility-github-action@v2
+        with:
+          languages: python
+          api_key: ${{ secrets.DD_API_KEY }}
+          site: datadoghq.com
+          service: storedog-discounts
+
+      - name: Install dependencies
+        working-directory: ./services/discounts
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        working-directory: ./services/discounts
+        run: |
+          python -m pytest test_discounts.py -v
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR
+        id: login-ghcr
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./services/discounts
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ghcr.io/datadog/storedog/discounts:latest
+          build-args: |
+            DD_GIT_REPOSITORY_URL=${{ github.repository }}
+            DD_GIT_COMMIT_SHA=${{ github.sha }}
