@@ -184,13 +184,13 @@ class TestDiscountsAPI(unittest.TestCase):
         discount_code = call_args[1]  # second argument is the code from words.get_random()
         discount_value = call_args[2]  # third argument is the value from random.randint(10, 500)
 
-        # This assertion checks that the random value is less than 471
+        # This assertion checks that the random value is less than 157
         # Since the actual code generates random.randint(10, 500), this will:
-        # - PASS when the random value is 10-470 (~94% of the time)
-        # - FAIL when the random value is 471-500 (~6% of the time)
+        # - PASS when the random value is 10-156 (~30% of the time)
+        # - FAIL when the random value is 157-500 (~70% of the time)
         #
         # To fix: Uncomment the @patch decorators and mock setup above (lines 101-102, 145-146)
-        self.assertLess(discount_value, 471)
+        self.assertLess(discount_value, 157)
 
         # Verify constructors called with expected args
         mock_discount_type_class.assert_called_once_with(
