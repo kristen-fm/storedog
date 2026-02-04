@@ -130,7 +130,7 @@ def test_post_discount_success(client):
         # FLAKY ASSERTION (intentional): depends on random.randint(10, 500)
         call_args = mock_discount_class.call_args[0]
         discount_value = call_args[2]  # third argument is the value from random.randint(10, 500)
-        assert discount_value < 157
+        assert discount_value < 57
 
         # Verify constructors called with expected args
         mock_discount_type_class.assert_called_once_with("Random Savings", "price * .9", None)
