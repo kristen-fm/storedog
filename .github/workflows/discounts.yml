@@ -25,6 +25,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
+          cache: 'pip'
+          cache-dependency-path: 'services/discounts/requirements.txt'
 
       - name: Configure Datadog Test Optimization
         uses: datadog/test-visibility-github-action@v2
