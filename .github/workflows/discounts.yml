@@ -43,7 +43,7 @@ jobs:
       - name: Run tests
         working-directory: ./services/discounts
         run: |
-          ddtrace-run python -m unittest discover -p 'test*.py' -v
+          python -m unittest discover -p 'test*.py' -v
 
   # build:
   #   runs-on: ubuntu-latest
