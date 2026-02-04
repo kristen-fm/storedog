@@ -45,7 +45,7 @@ jobs:
       - name: Run tests
         working-directory: ./services/discounts
         run: |
-          python -m unittest discover -p 'test*.py' -v
+          pytest -v
 
   # build:
   #   runs-on: ubuntu-latest

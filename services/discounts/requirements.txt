@@ -20,6 +20,8 @@ psutil==5.8.0
 psycopg2==2.8.6
 PyDispatcher==2.0.5
 PyYAML==5.4.1
+pytest>=7.0
+pytest-flask>=1.2.0
 requests==2.25.1
 six==1.15.0
 sortedcontainers==2.3.0
