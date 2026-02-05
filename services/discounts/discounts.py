@@ -17,6 +17,13 @@ import sys
 import os
 import re
 
+
+
+# Adding some new lines to trigger the check
+
+
+
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 patch(logging=True)
@@ -161,4 +168,5 @@ def getDiscount():
     else:
         err = jsonify({"error": "Invalid request method"})
         err.status_code = 405
+        logger.debug(f"Status code: {err.status_code}")
         return err

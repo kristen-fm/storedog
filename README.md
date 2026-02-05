@@ -21,6 +21,13 @@ Storedog is a Dockerized e-commerce site used primarily in labs run at [learn.da
 > 
 > This documentation includes instructions for running the application locally and in lab environments.
 
+
+
+
+
+
+
+
 Many parts of this application were intentionally modified to introduce performance issues, security vulnerabilities, and other intentionally problematic code. This is to help you learn how to use Datadog to troubleshoot and fix these issues. This application is not intended to be used in production.
 
 ## Local development
